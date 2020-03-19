@@ -31,5 +31,13 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 DEFAULT_PAGINATION = False
 
+
+# Search
+#PLUGINS = ['tipue_search.tipue_search']
+
+PLUGIN_PATH = 'plugins'
+PLUGINS = ['tipue_search']
+DIRECT_TEMPLATES = ['index', 'tags', 'categories', 'authors', 'archives', 'search']
+
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

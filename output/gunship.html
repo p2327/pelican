@@ -60,6 +60,16 @@ and
             <h1><a href=" " title="title">pscripts</a></h1>
             <span class="description"> </span>
             <!-- <span class="feed"><a href="">RSS</a> | <a href="">Atom</a></span> -->
+
+            <form>
+                <div class="tipue_search_group">
+                <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required></div>
+                <!--<button type="submit" class="tipue_search_button"><div class="tipue_search_icon">&#9906;</div></button>
+                </div>-->
+                </form>
+                
+                <div id="tipue_search_content"></div>
+
         </div>
 
         <div id="footer">
@@ -70,13 +80,27 @@ and
 
             <div id="credits">
                 <!--<span>Adapted from <a href="http://wordpress.org/themes/monospace">Monospace</a> || Created with <a href="">Pelican</a></span>-->
-                <object align="left"><span>Created with <a href="https://docs.getpelican.com/en/stable/">Pelican</a></span></object>
+                <object align="right"><span>Created with <a href="https://docs.getpelican.com/en/stable/">Pelican</a></span></object>
             </div>
                 
         </div>
 
 
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch_set.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Tipue-Search/5.0.0/tipuesearch.css"/> 
+
+    <script>
+        $(document).ready(function() {
+             $('#tipue_search_input').tipuesearch();
+        });
+        </script>
+
+    <script src="tipuesearch_content.js"></script>
+
 
 </body>
 </html>
