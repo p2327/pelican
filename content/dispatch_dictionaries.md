@@ -1,11 +1,15 @@
 title: Dispatch dictionaries
 slug: dispatch
 category: programming
-date: 2020-03-19
-modified: 2020-03-19
+date: 2020-03-18
+modified: 2020-03-18
 
 
 The dispatch function is a general method for implementing a message passing interface for abstract data. 
+
+In this post we'll see how to use dispatch dictionaries to build a (simplified) [RNA translation](https://www.nature.com/scitable/definition/translation-rna-translation-173/) machine.
+
+*TODO*
 
 ```python
 from collections import deque

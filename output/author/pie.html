@@ -28,57 +28,43 @@
         
 
             <header>
-            <h1><a href="" id="site-title"> </a>  <a href="/dispatch.html" id="page-title">Dispatch dictionaries</a></h1>
+            <h1><a href="" id="site-title"> </a>  <a href="/streams.html" id="page-title">Streams</a></h1>
 <time datetime="2020-03-19T00:00:00+00:00">Thu 19 March 2020</time>            </header>
 
             <article>
-                <p>The dispatch function is a general method for implementing a message passing interface for abstract data. </p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+                <p>Today we are looking at streams, a way to represent sequential data <em>implicitly</em>. What is a stream? A stream is a lazily computed linked list.</p>
+<p>Let's design a class to achieve this lazy evaluation: </p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Stream</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A lazily computed linked list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">class</span> <span class="nc">empty</span><span class="p">:</span>
+            <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s1">&#39;Stream.empty&#39;</span>
+        <span class="n">empty</span> <span class="o">=</span> <span class="n">empty</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">rna_translate</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A rna translation machine using a dispatch dictionary and deque&quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">compute_rest</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">empty</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">callable</span><span class="p">(</span><span class="n">compute_rest</span><span class="p">),</span> <span class="s1">&#39;compute_rest must be callable.&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">=</span> <span class="n">first</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_compute_rest</span> <span class="o">=</span> <span class="n">compute_rest</span>
 
-    <span class="n">bases</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>  <span class="c1"># prepare list of ribonucleic bases</span>
-    <span class="n">bases_q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">bases</span><span class="p">)</span>
-    <span class="n">codon</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">protein</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Return the rest of the stream, </span>
+<span class="sd">            computing it if necessary.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_rest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_rest</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_compute_rest</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rest</span>
+        <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;Stream(</span><span class="si">{0}</span><span class="s1">, &lt;...&gt;)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">))</span>
+</pre></div>
 
-    <span class="k">def</span> <span class="nf">ribosome</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>  <span class="c1"># processes the bases queue</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bases_q</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">protein</span>
-        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="n">codon</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bases_q</span><span class="o">.</span><span class="n">popleft</span><span class="p">())</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="n">snip</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">codon</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># assembly the codon</span>
-                <span class="k">return</span> <span class="n">translate</span><span class="p">(</span><span class="n">snip</span><span class="p">)</span> 
 
-    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>  <span class="c1"># reads the codon snip into an amino acid</span>
-        <span class="k">nonlocal</span> <span class="n">protein</span>
-        <span class="k">nonlocal</span> <span class="n">codon</span>
-        <span class="n">stop_codons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;UAA&#39;</span><span class="p">,</span> <span class="s1">&#39;UAG&#39;</span><span class="p">,</span> <span class="s1">&#39;UGA&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">stop_codons</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">protein</span>
-        <span class="n">protein</span> <span class="o">+=</span> <span class="p">[</span><span class="n">dispatch</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span>  <span class="c1"># add the amino to our protein sequence</span>
-        <span class="n">codon</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># reset the codon</span>
-        <span class="k">return</span> <span class="n">ribosome</span><span class="p">(</span><span class="n">codon</span><span class="p">)</span>
-
-    <span class="n">dispatch</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;AUG&#39;</span><span class="p">:</span><span class="s1">&#39;Methyonine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UUU&#39;</span><span class="p">:</span><span class="s1">&#39;Phenylalanine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UUC&#39;</span><span class="p">:</span><span class="s1">&#39;Phenylalanine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UUG&#39;</span><span class="p">:</span><span class="s1">&#39;Leucine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UUA&#39;</span><span class="p">:</span><span class="s1">&#39;Leucine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UAU&#39;</span><span class="p">:</span><span class="s1">&#39;Tyrosine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UAC&#39;</span><span class="p">:</span><span class="s1">&#39;Tyrosine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UGU&#39;</span><span class="p">:</span><span class="s1">&#39;Cysteine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UGC&#39;</span><span class="p">:</span><span class="s1">&#39;Cysteine&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UGG&#39;</span><span class="p">:</span><span class="s1">&#39;Tryptophan&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UAA&#39;</span><span class="p">:</span><span class="s1">&#39;STOP&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UAG&#39;</span><span class="p">:</span><span class="s1">&#39;STOP&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;UGA&#39;</span><span class="p">:</span><span class="s1">&#39;STOP&#39;</span>
-                <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">ribosome</span><span class="p">(</span><span class="n">bases_q</span><span class="p">)</span>
-</pre></div>            </article>
+<p>We will use this to build a small program that calculates prime numbers.</p>
+<p><em>TODO</em></p>            </article>
                 <section id="article-list">
                     <h2>All posts</h2>
                     <ol>
@@ -87,19 +73,49 @@
         
 
  
-            <li><a href="/tesct3.html" rel="bookmark" title="Permalink to testc">testc</a></li>
+            <li><a href="/dispatch.html" rel="bookmark" title="Permalink to Dispatch dictionaries">Dispatch dictionaries</a></li>
         </ol>
         </section><!-- #article-list -->
         
 
  
-            <li><a href="/test1.html" rel="bookmark" title="Permalink to test">test</a></li>
+            <li><a href="/pandas.html" rel="bookmark" title="Permalink to Effective pandas (Part 1)">Effective pandas (Part 1)</a></li>
         </ol>
         </section><!-- #article-list -->
         
 
  
-            <li><a href="/gunship.html" rel="bookmark" title="Permalink to Gunship">Gunship</a></li>
+            <li><a href="/scienceapp.html" rel="bookmark" title="Permalink to Science questions (Part 1)">Science questions (Part 1)</a></li>
+        </ol>
+        </section><!-- #article-list -->
+        
+
+ 
+            <li><a href="/reddit.html" rel="bookmark" title="Permalink to Reddit posts webapp (Part 1)">Reddit posts webapp (Part 1)</a></li>
+        </ol>
+        </section><!-- #article-list -->
+        
+
+ 
+            <li><a href="/flowerapp.html" rel="bookmark" title="Permalink to Building a ML webapp (Part 1)">Building a ML webapp (Part 1)</a></li>
+        </ol>
+        </section><!-- #article-list -->
+        
+
+ 
+            <li><a href="/clicypher.html" rel="bookmark" title="Permalink to CLI cypher">CLI cypher</a></li>
+        </ol>
+        </section><!-- #article-list -->
+        
+
+ 
+            <li><a href="/lib.html" rel="bookmark" title="Permalink to Writing a Python library (Part 1)">Writing a Python library (Part 1)</a></li>
+        </ol>
+        </section><!-- #article-list -->
+        
+
+ 
+            <li><a href="/bulldozers-1.html" rel="bookmark" title="Permalink to The blue book of bulldozers (Part 1)">The blue book of bulldozers (Part 1)</a></li>
         </ol>
         </section><!-- #article-list -->
             </div>
