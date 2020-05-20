@@ -1,6 +1,6 @@
 title: Dispatch dictionaries
 slug: dispatch
-category: programming
+category: python
 date: 2020-03-18
 modified: 2020-03-18
 

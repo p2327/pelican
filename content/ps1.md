@@ -1,6 +1,6 @@
 title: Purescript
 slug: ps1
-category: data analysis
+category: purescript
 date: 2020-04-13
 modified: 2020-04-13
 

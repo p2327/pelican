@@ -1,11 +1,11 @@
-title: The blue book of bulldozers (Part 1)
+title: Data cleaning and predictive analysis using Python 
 slug: bulldozers-1
-category: data analysis
+category: projects
 date: 2019-12-12
 modified: 2019-12-12
 
 
-Today we are going to work on a dataset from [Kaggle](https://www.kaggle.com/).
+Today we are going to work on a dataset from [Kaggle](https://www.kaggle.com/). We'll use this example to look at some aspects of data cleaning, feature engineerign and model tuning for predictive analysis.
 
 *TODO*
 

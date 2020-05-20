@@ -1,6 +1,6 @@
 title: Writing a Python library (Part 1)
 slug: lib
-category: programming
+category: projects
 date: 2019-12-19
 modified: 2019-12-20
 

@@ -1,6 +1,6 @@
 title: Building a ML webapp (Part 1)
 slug: flowerapp
-category: machine learning
+category: projects
 date: 2020-01-18
 modified: 2020-02-19
 

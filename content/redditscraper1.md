@@ -1,6 +1,6 @@
 title: Reddit posts webapp (Part 1)
 slug: reddit
-category: web development
+category: projects
 date: 2020-01-19
 modified: 2020-01-19
 

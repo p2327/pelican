@@ -1,6 +1,6 @@
 title: CLI cypher
 slug: clicypher
-category: programming
+category: projects
 date: 2020-01-17
 modified: 2020-01-18
 
@@ -12,3 +12,8 @@ In this post we will build a text [cypher](https://en.wikipedia.org/wiki/Caesar_
 
 
 *TODO*
+
+
+
+
+

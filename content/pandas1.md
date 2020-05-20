@@ -1,6 +1,6 @@
 title: Effective pandas (Part 1)
 slug: pandas
-category: data analysis
+category: pandas
 date: 2020-03-13
 modified: 2020-03-13
 
