@@ -104,4 +104,5 @@ input#s { width:70%; height:auto; margin:5px 0px; }
 #page-title{
     position : relative;
     top : 8px;
+    font-size: 16px;
 }
