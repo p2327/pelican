@@ -1,5 +1,5 @@
-title: Purescript
-slug: ps1
+title: 28 Purescript programs
+slug: ps2
 category: purescript
 date: 2020-05-13
 modified: 2020-05-13
