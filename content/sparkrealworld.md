@@ -1,8 +1,8 @@
 title: Spark from scratch
 slug: apachesparkfromscratch
 category: spark
-date: 2020-05-19
-modified: 2020-05-19
+date: 2020-04-19
+modified: 2020-04-19
 
 
 
@@ -14,7 +14,7 @@ Spark is a distributed computing framework which provides an interface for progr
 
 A Spark application runs as an independed process on a cluster and consists of one *driver process* in charge of the control flow of the work be done, and a set of *executors* arranged across the cluster nodes which do the actual work (i.e run the individual *tasks* in a *Spark job*) and store (i.e cache) any data specified by the user. 
 
-<img src="https://spark.apache.org/docs/latest/img/cluster-overview.png" width="500">
+<img src="https://spark.apache.org/docs/latest/img/cluster-overview.png" width="550">
 
 Deploying and allocating resources to these processes is the responsibility of the *cluster manager* (YARN, Mesos or Spark Standalone). For more details, heres the [documentation](https://spark.apache.org/docs/latest/cluster-overview.html).
 
