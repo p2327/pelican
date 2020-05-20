@@ -6,7 +6,7 @@ modified: 2020-05-20
 
 
 
-Today we are looking at `*args*` and `**kwargs*`. In Python this special syntax used in function definitions indicates it is possible to pass a variable number of arguments to the function.
+Today we are looking at `*args` and `**kwargs`. In Python this special syntax used in function definitions indicates it is possible to pass a variable number of arguments to the function.
 
 - `*args*` is used to pass a *non-keyworded*, variable-length argument list
 - `**kwargs*` is used to pass a keyworded, variable-length argument list.
