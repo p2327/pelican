@@ -19,7 +19,7 @@ A Spark application runs as an independed process on a cluster and consists of o
 Deploying and allocating resources to these processes is the responsibility of the *cluster manager* (YARN, Mesos or Spark Standalone). For more details, heres the [documentation](https://spark.apache.org/docs/latest/cluster-overview.html).
 
 A tipical Spark application execution flow is as follows:
-1. The application start and instantiates a `Sparkcontext¬ which becomes the applciation driver.
+1. The application start and instantiates a `Sparkcontext` which becomes the applciation driver.
 2. The driver program asks for resources to the cluster manager for launching executors.
 3. Cluster manager launches executors.
 4. The driver process runs through the user application, sending tasks to executors.
