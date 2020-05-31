@@ -2,7 +2,7 @@ title: Spark from scratch
 slug: apachesparkfromscratch
 category: spark
 date: 2020-04-19
-modified: 2020-04-19
+modified: 2020-05-31
 
 
 
@@ -35,3 +35,38 @@ With this overview we can now get started with the project.
 ### Problem statement
 
 To be continued...
+
+
+### The data
+
+We are going to generate fake data for our project using the Fake Loge Generator library.
+
+Install by running:
+```bash
+git clone https://github.com/kiritbasu/Fake-Apache-Log-Generator.git
+cd  Fake-Apache-Log-Generator
+```
+
+Create a virtual environment and install dependencies:
+```bash
+conda create --name py35 python=3.5
+conda activate fakelogs
+pip install -r requirements.txt 
+```
+
+Print some sample data to the terminal:
+```bash
+python apache-fake-log-gen.py -n 20
+```
+
+Create a zip file of the logs and specify RWSPARK as prefix for the filename:
+```bash
+python apache-fake-log-gen.py -n 20 -o GZ 
+```
+
+We now have our logs saved ```RWSPARK_access_log_20200531-125656.log.gz``` and ready to be uploaded to our S3 bucket.
+
+
+#### Copy data to S3
+
+TBC
