@@ -34,12 +34,46 @@ With this overview we can now get started with the project.
 
 ### Problem statement
 
-To be continued...
+Below is waht we aim to achieve with the project.
 
+Explore Big Data concepts:
+- Build a Data Lake to store structured and unstructured data
+- Use optimisation techniques such as partioned data/tables
+- Use Parquet columnar data format
+
+Define and schedule our ETL process:
+- Create daily jobs to process raw incoming data in Apache log format, clean and extract relevant features data
+- Create hourly and daily jobs to aggregate raw tables. These will be exposed so that analysts can run queries.
+
+We'll be using AWS as a cloud base infrastructure throughout the project.
+
+
+### Project approach
+
+Our solution will use AWS as cloud base infrastructure, amnage our pipelines with Airflow and use Zeppelin as data consumption layer.
+
+Here is a schema of the components:
+<img src="https://i.imgur.com/WRoKIlS.png" width="550">
+
+
+**Amazon S3 as a Data Lake**
+We'll be using Amazon S3 as a data lake to store and retrieve our data. This wil make the data easily accessible at any time and from anywhere with an internet connection.
+
+Amazon S3 benefits:
+- Easy to use
+- Stores both structured and unstructured data
+- Cost effective
+- No need to move data onto naother system to run analytics on it
+
+
+**Airflow as job scheduler**
+
+to be continued..
 
 ### The data
 
-We are going to generate fake data for our project using the Fake Loge Generator library.
+The first thign will need is data.
+We are going to generate fake logs using the Fake Log Generator library.
 
 Install by running:
 ```bash
