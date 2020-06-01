@@ -19,17 +19,12 @@ A Spark application runs as an independed process on a cluster and consists of o
 Deploying and allocating resources to these processes is the responsibility of the *cluster manager* (YARN, Mesos or Spark Standalone). For more details, heres the [documentation](https://spark.apache.org/docs/latest/cluster-overview.html).
 
 A tipical Spark application execution flow is as follows:
-1. The application start and instantiates a `Sparkcontext` which becomes the applciation driver.
-
-2. The driver program asks for resources to the cluster manager for launching executors.
-
-3. Cluster manager launches executors.
-
-4. The driver process runs through the user application, sending tasks to executors.
-
-5. Executors run the tasks and save the results. IF any worker crashes, its tasks are sent to a different executor. This is Spark fault tolerance mechanism.
-
-6. Once `SparkContext` is stopped or the main method exits (or crashes), all executors are terminated and cluster resources are released.
+* The application start and instantiates a `Sparkcontext` which becomes the applciation driver.
+* The driver program asks for resources to the cluster manager for launching executors.
+* Cluster manager launches executors.
+* The driver process runs through the user application, sending tasks to executors.
+* Executors run the tasks and save the results. IF any worker crashes, its tasks are sent to a different executor. This is Spark fault tolerance mechanism.
+* Once `SparkContext` is stopped or the main method exits (or crashes), all executors are terminated and cluster resources are released.
 
 With this overview we can now get started with the project.
 
@@ -42,13 +37,13 @@ With this overview we can now get started with the project.
 Below is waht we aim to achieve with the project.
 
 Explore Big Data concepts:
-- Build a Data Lake to store structured and unstructured data
-- Use optimisation techniques such as partioned data/tables
-- Use Parquet columnar data format
+* Build a Data Lake to store structured and unstructured data
+* Use optimisation techniques such as partioned data/tables
+* Use Parquet columnar data format
 
 Define and schedule our ETL process:
-- Create daily jobs to process raw incoming data in Apache log format, clean and extract relevant features data
-- Create hourly and daily jobs to aggregate raw tables. These will be exposed so that analysts can run queries.
+* Create daily jobs to process raw incoming data in Apache log format, clean and extract relevant features data
+* Create hourly and daily jobs to aggregate raw tables. These will be exposed so that analysts can run queries.
 
 We'll be using AWS as a cloud base infrastructure throughout the project.
 
@@ -65,13 +60,10 @@ Here is a schema of the components:
 We'll be using Amazon S3 as a data lake to store and retrieve our data. This wil make the data easily accessible at any time and from anywhere with an internet connection.
 
 Amazon S3 benefits:
-- Easy to use
-
-- Stores both structured and unstructured data
-
-- Cost effective
-
-- No need to move data onto naother system to run analytics on it
+* Easy to use
+* Stores both structured and unstructured data
+* Cost effective
+* No need to move data onto naother system to run analytics on it
 
 
 **Airflow as job scheduler**
